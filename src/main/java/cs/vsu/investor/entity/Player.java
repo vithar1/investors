@@ -34,6 +34,9 @@ public class Player implements Serializable {
     @Field("money")
     private Integer money;
 
+    @Field("is_completed_move")
+    private Boolean isCompletedMove;
+
     @DBRef
     @Field("region")
     private Region region;

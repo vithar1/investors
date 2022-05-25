@@ -26,6 +26,9 @@ public class Game implements Serializable {
     @Field("title")
     private String title;
 
+    @Field("month")
+    private Integer month;
+
     @DBRef
     @Field("player")
     @JsonIgnoreProperties(value = { "region", "players" }, allowSetters = true)
