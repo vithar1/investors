@@ -24,9 +24,6 @@ public class House implements Serializable {
     @Id
     private String id;
 
-    @Field("cost")
-    private Integer cost;
-
     @Field("build_time")
     private Integer buildTime;
 

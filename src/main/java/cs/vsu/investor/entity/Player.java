@@ -7,7 +7,10 @@ import java.util.Set;
 import javax.validation.constraints.*;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.HashIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -34,8 +37,8 @@ public class Player implements Serializable {
     @Field("money")
     private Integer money;
 
-    @Field("is_completed_move")
-    private Boolean isCompletedMove;
+    @Field("is_complete_move")
+    private Boolean isCompleteMove;
 
     @DBRef
     @Field("region")
@@ -44,9 +47,20 @@ public class Player implements Serializable {
     @DBRef
     @Field("game")
     @JsonIgnoreProperties(value = { "players" }, allowSetters = true)
+    @ToString.Exclude
     private Game game;
 
     @DBRef
     @Field("for_sales")
+    @EqualsAndHashCode.Exclude
     private Set<ForSale> forSales = new HashSet<>();
+
+    public void addForSale(ForSale forSale) {
+        this.forSales.add(forSale);
+        forSale.setPlayer(this);
+    }
+
+    public void increaseMoney(Integer number) {
+        this.money += number;
+    }
 }

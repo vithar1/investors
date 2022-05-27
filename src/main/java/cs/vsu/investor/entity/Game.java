@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -32,6 +33,7 @@ public class Game implements Serializable {
     @DBRef
     @Field("player")
     @JsonIgnoreProperties(value = { "region", "players" }, allowSetters = true)
+    @ToString.Exclude
     private Set<Player> players = new HashSet<>();
 
     public void setPlayers(Set<Player> players) {
